@@ -59,7 +59,7 @@ bool RoomGame::Initialize() {
 		return false;	
 	}
 
-	_pSoundManager->LoadSEInGame();
+	_pSoundManager->LoadSERoomGame();
 
 	//_pCamera->SetPosition(0.0f, 10.0f, -20.0f);
 	//_pCamera->SetTarget(0.0f, 10.0f, 0.0f);
@@ -162,14 +162,14 @@ bool RoomGame::Process() {
 
 		ModeServer::GetInstance()->Del(this);  // ‚±‚Ìƒ‚[ƒh‚ðíœ—\–ñ
 		ModeServer::GetInstance()->Add(new ModeTitle(), 1, "Title");  // ŽŸ‚Ì
-		_pSoundManager->PlaySECommon(SoundManager::SECommon::OK2);
+		_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK2);
 	}
 	if (_pRoomGameUI->GetGoActoin()) {
 		_pRoomGameUI->SetGoAction(false);
 
 		ModeServer::GetInstance()->Del(this);  // ‚±‚Ìƒ‚[ƒh‚ðíœ—\–ñ
 		ModeServer::GetInstance()->Add(new Action3DGame(), 2, "Action3DGame");  // ŽŸ‚Ì
-		_pSoundManager->PlaySECommon(SoundManager::SECommon::OK2);
+		_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK2);
 	}
 
 	ModeBase::Process();

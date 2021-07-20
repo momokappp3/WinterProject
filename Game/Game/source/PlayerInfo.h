@@ -28,6 +28,10 @@ public:
         return _mentalNum;
     }
 
+    int GetTotalFavor() {
+        return _favor;
+    }
+
     //‘«‚·ŠÖ”ˆø‚­ŠÖ”
     void SetFavor(int num, bool plus) {
         if (plus) {

@@ -150,7 +150,7 @@ bool RoomGameUI::Init(std::shared_ptr<SoundManager>& soundManager, std::shared_p
 
     auto onSelect = [this]() {
         //サウンド鳴らす
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::Select);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Select);
     };
 
     _pUpButton->SetOnSelect(onSelect);
@@ -252,7 +252,7 @@ void RoomGameUI::Process() {
         _pUIRoomMenuInit->SetEnd(true);  //endの座標まで持っていく
         _pUIRoomMenu->SetStart(true);  //startの座標までもっていく
         _type = RoomGameUIType::Menu;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     //cancelを押したとき処理
@@ -262,7 +262,7 @@ void RoomGameUI::Process() {
         _type = RoomGameUIType::MenuIinit;
 
         _pUIRoomStory->SetAddImageSize(1);
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::Cancel);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Cancel);
     }
 
     _pUIRoomSetting->Process();
@@ -271,7 +271,7 @@ void RoomGameUI::Process() {
         _pUIRoomSetting->SetStart(true);  //設定を開く
         _pUIRoomSetting->SetNowMode(true);
         _type = RoomGameUIType::Setting;
-         _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+         _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     _pUIRoomItem->Process();
@@ -280,21 +280,21 @@ void RoomGameUI::Process() {
         _pUIRoomItem->SetStart(true);  //設定を開く
         _pUIRoomItem->SetNowMode(true);
         _type = RoomGameUIType::Item;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
     
     //酒の下げる処理
     if (_sakeItem && _pDrunkTime->GetNowTime() == 1) {
         _sakeItem = false;
         _pPlayerInfo->SetMentalNum(30, false);
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::BarDown,100);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::BarDown,100);
     }
     
 
     if (_pDrunkTime->GetEndNow()) {
         _sakeItem = false;
         _pPlayerInfo->SetMentalNum(30, false);
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::BarDown, 100);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::BarDown, 100);
     }
 
     _pUIRoomStory->Process();
@@ -303,7 +303,7 @@ void RoomGameUI::Process() {
         _pUIRoomStory->SetStart(true);  //設定を開く
         _pUIRoomStory->SetNowMode(true);
         _type = RoomGameUIType::Story;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     //スクリプトエンジンxボタンの処理
@@ -318,7 +318,7 @@ void RoomGameUI::Process() {
 
         if (_scriptClose) {
             _pScriptEngin->SetState(amg::ScriptEngine::ScriptState::END);
-            _pSoundManager->PlaySECommon(SoundManager::SECommon::Cancel);
+            _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Cancel);
         }
     }
 
@@ -342,7 +342,7 @@ void RoomGameUI::Process() {
                 _giveCoin -= 10;
                 if (_giveCoin < 1000) {
                     _giveCoin = 1000;
-                    _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+                    _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
                 }
             }
         }
@@ -361,7 +361,7 @@ void RoomGameUI::Process() {
         _pUIRoomStory->SetEnd(true);
         _pUIRoomStory->SetNowMode(false);
         _type = RoomGameUIType::Menu;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::Cancel);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Cancel);
     }
 
     _pUIRoomMenuInit->Process();
@@ -384,20 +384,20 @@ void RoomGameUI::SettingProcess() {
     if (_pUIRoomSetting->GetComandSelect(0) && _pMouseInput->GetTrgLeft()) {   //0=外出
         //外出モードに変更の処理
         _goAction = true;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK2);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK2);
     }
 
     if (_pUIRoomSetting->GetComandSelect(1) && _pMouseInput->GetTrgLeft()) {  //1 = title
         //タイトルモードに変更の処理
         _goTitle = true;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK2);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK2);
     }
 
     if (_pUIRoomSetting->GetClose() == 1 && _pMouseInput->GetTrgLeft()) {
         _pUIRoomSetting->SetEnd(true);
         _pUIRoomSetting->SetNowMode(false);
         _type = RoomGameUIType::Menu;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::Cancel);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Cancel);
     }
 }
 
@@ -415,14 +415,14 @@ void RoomGameUI::ItemProcess() {
         _pDownButton->SetDraw(0, true);
         _pDownButton->SetDraw(1, true);
 
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     if (_pUIPopUp->GetOk() && _pUIPopUp->GetTrgLeft() && _pUIRoomItem->GetNowItemType() == 0 && !_okFlag) {  //二回目に来ている
         if ( _pPlayerInfo->GetCoin() >= _giveCoin) {
             _pPlayerInfo->SetCoin(_giveCoin, false);
             _okFlag = true;
-            _pSoundManager->PlaySECommon(SoundManager::SECommon::OK2);
+            _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK2);
 
             //_pUIRoomMenu->PlusMentalNum(10);  //とりあえず
 
@@ -432,7 +432,7 @@ void RoomGameUI::ItemProcess() {
 
         }
         else {
-            _pSoundManager->PlaySECommon(SoundManager::SECommon::Mistake);
+            _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Mistake);
             _kaneNo = true;
         }
     }
@@ -444,14 +444,14 @@ void RoomGameUI::ItemProcess() {
         _pUIRoomItem->SetNowItemType(1);
 
         _pUIPopUp->SetPopString(_pUIRoomItem->GetTequilaString());
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     if (_pUIPopUp->GetOk() && _pUIPopUp->GetTrgLeft() && _pDrunkTime->GetNowTime() == 0 &&
         _pUIRoomItem->GetNowItemType() == 1) {
         _sakeItem = true;
         _pDrunkTime->SetStart(DRUNK_TIME);
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK2);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK2);
 
         _pPlayerInfo->SetMentalNum(30, true);
     }
@@ -460,7 +460,7 @@ void RoomGameUI::ItemProcess() {
         _pUIRoomItem->SetEnd(true);
         _pUIRoomItem->SetNowMode(false);
         _type = RoomGameUIType::Menu;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::Cancel);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Cancel);
     }
 }
 
@@ -472,7 +472,7 @@ void RoomGameUI::StoryProcess() {
         _pUIRoomStory->SetStory0StringDraw(true);
 
         _pUIPopUp->SetPopString(_pUIRoomStory->GetStory0String());
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     //1Story
@@ -482,7 +482,7 @@ void RoomGameUI::StoryProcess() {
         _pUIRoomStory->SetStory1StringDraw(true);
 
         _pUIPopUp->SetPopString(_pUIRoomStory->GetStory1String());
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     //2Story
@@ -492,7 +492,7 @@ void RoomGameUI::StoryProcess() {
         _pUIRoomStory->SetStory2StringDraw(true);
 
         _pUIPopUp->SetPopString(_pUIRoomStory->GetStory2String());
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     //3Story
@@ -502,7 +502,7 @@ void RoomGameUI::StoryProcess() {
         _pUIRoomStory->SetStory3StringDraw(true);
 
         _pUIPopUp->SetPopString(_pUIRoomStory->GetStory3String());
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     //4Story
@@ -512,14 +512,14 @@ void RoomGameUI::StoryProcess() {
         _pUIRoomStory->SetStory4StringDraw(true);
 
         _pUIPopUp->SetPopString(_pUIRoomStory->GetStory4String());
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
     }
 
     //PopUpOK
     if (_pUIRoomStory->GetStringType() == 0 && _pUIPopUp->GetOk() && _pUIPopUp->GetTrgLeft()) {
         _pScriptEngin->ReInitialize();
         _pScriptEngin->SetState(amg::ScriptEngine::ScriptState::PARSING);
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::OK2);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK2);
     }
 
     //PopUpClose
@@ -527,7 +527,7 @@ void RoomGameUI::StoryProcess() {
         _pUIRoomStory->SetEnd(true);
         _pUIRoomStory->SetNowMode(false);
         _type = RoomGameUIType::Menu;
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::Cancel);
+        _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Cancel);
     }
 }
 
@@ -544,7 +544,7 @@ void RoomGameUI::Draw() {
     if (_pUIPopUp->GetNowMode()) {
         if (_pUIPopUp->GetClose() && _pUIPopUp->GetTrgLeft() || _pUIPopUp->GetOk() && _pUIPopUp->GetTrgLeft()) {
             if (_pUIPopUp->GetClose()) {
-                _pSoundManager->PlaySECommon(SoundManager::SECommon::Cancel);
+                _pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Cancel);
             }
             _pUIPopUp->SetNowMode(false);
             _pUIRoomItem->StrinRoomlFalse();

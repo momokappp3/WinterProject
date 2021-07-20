@@ -67,7 +67,7 @@ bool Action3DGame::Process() {
 	//ƒQ[ƒ€‚ÌBGM
 	if (!_isBGM) {
 		if (_pSoundManager != nullptr) {
-			_pSoundManager->PlayBgm(SoundManager::BGM::InGame);
+			_pSoundManager->PlayBgm(SoundManager::BGM::ActionGame);
 			_isBGM = true;
 			//_pUITime->SetStart(3, 20);
 		}
@@ -116,7 +116,7 @@ bool Action3DGame::Process() {
 			if (_pKeyInput->_key[(KEY_INPUT_RETURN)] == 1) {
 				ModeServer::GetInstance()->Del(this);
 				//ModeServer::GetInstance()->Add(new ModeClear(), 1, "clear");
-				_pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+				_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
 			}
 		}
 	}
@@ -148,7 +148,7 @@ bool Action3DGame::Process() {
 			if (_pKeyInput->_key[(KEY_INPUT_RETURN)] == 1) {
 				_pMazeStage->GetBox()->SetIsItem(false);
 				_pItem->SetItem(_pMazeStage->GetBox()->GetItemNum());
-				_pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+				_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::OK);
 			}
 		}
 		else {

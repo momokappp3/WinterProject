@@ -9,19 +9,13 @@ public:
 
 	enum class BGM{
 		Title = 0,
-		InGame,
+		RoomGame,
+		ActionGame,
 
 		Max
 	};
 
 	enum class SECommon{
-		Select = 0,
-		OK,   //ぷぃ
-		OK2,  //フォーン
-		Cancel,  //閉じるときの音
-		Mistake,
-		BarUp,
-		BarDown,
 
 		Max
 	};
@@ -32,21 +26,29 @@ public:
 		Max
 	};
 
-	enum class SEDeckSelect {
-		ChoiceMove = 0,
+	enum class SERoomGame {
+		Select = 0,
+		OK,  //ぷぃ
+		OK2,  //フォーン
+		Cancel,  //メニューなど閉じるときの音
+		Mistake,
+		BarUp,
+		BarDown,
 
 		Max
 	};
 
-	enum class InGame {
+	enum class SEActionGame {
 		BoxOpen = 0,
+		Cancel,
+		Kettei,
+		Select,
 
 		Max
 	};
 
 	bool Init();
 
-	
 	bool LoadSECommon();
 	void DeleteSECommon();
 	bool PlaySECommon(SECommon type, int delayFrame = 0);
@@ -55,13 +57,13 @@ public:
 	void DeleteSETitle();
 	bool PlaySETitle(SETitle type, int delayFrame = 0);
 
-	bool LoadSEDeckSelect();
-	void DeleteSEDeckSelect();
-	bool PlaySEDeckSelect(SEDeckSelect type, int delayFrame = 0);
+	bool LoadSERoomGame();
+	void DeleteSERoomGame();
+	bool PlaySERoomGame(SERoomGame type, int delayFrame = 0);
 
-	bool LoadSEInGame();
-	void DeleteSEInGame();
-	bool PlaySEInGame(InGame type, int delayFrame = 0);
+	bool LoadSEActionGame();
+	void DeleteSEActionGame();
+	bool PlaySEActionGame(SEActionGame type, int delayFrame = 0);
 	
 
 	void Process();
@@ -86,8 +88,8 @@ private:
 	std::vector<int> _vSECommonHandle;
 	std::vector<int> _vSETitleHandle;
 	std::vector<int> _vSETitleMenuHandle;
-	std::vector<int> _vSEDeckSelectHandle;
-	std::vector<int> _vSEInGameHandle;
+	std::vector<int> _vSERoomGameHandle;
+	std::vector<int> _vSEActionGameHandle;
 	
 
 	BGM _nowPlayBgm;

@@ -107,5 +107,6 @@ private:
     int _mouseY;
 
     int _lastMolecule;
+    int _lastTotalFavor;
     int _lastMentalNum;
 };

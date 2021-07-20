@@ -9,8 +9,8 @@ SoundManager::SoundManager() {
 	_vSECommonHandle.clear();
 	_vSETitleHandle.clear();
 	_vSETitleMenuHandle.clear();
-	_vSEDeckSelectHandle.clear();
-	_vSEInGameHandle.clear();
+	_vSERoomGameHandle.clear();
+	_vSEActionGameHandle.clear();
 	
 
 	_nowPlayBgm = BGM::Max;
@@ -25,7 +25,8 @@ SoundManager::~SoundManager() {
 bool SoundManager::Init() {
 
 	_vBgmFileName.push_back(_T("mp3/titleBGM.mp3"));
-	_vBgmFileName.push_back(_T("mp3/gameBGM.mp3"));
+	_vBgmFileName.push_back(_T("mp3/roomBGM.mp3"));
+	_vBgmFileName.push_back(_T("mp3/actionBGM.mp3"));
 
 	return true;
 }
@@ -40,8 +41,7 @@ bool SoundManager::Init() {
 bool SoundManager::LoadSECommon() {
 
 	std::vector<const TCHAR*> SEname = {
-		_T("mp3/SE/selectSE.mp3"), _T("mp3/SE/okSE.mp3"), _T("mp3/SE/ok.mp3"), _T("mp3/SE/DeckSelectCancel.mp3"),
-		_T("mp3/SE/mistake.mp3"),_T("mp3/SE/barUp.mp3"),_T("mp3/SE/barDown.mp3"),
+		
 	};
 
 	return LoadSE(SEname, _vSECommonHandle);
@@ -104,75 +104,77 @@ bool SoundManager::PlaySETitle(SETitle type, int delayFrame) {
 
 // ==============================================================
 //
-// DeckSelect
+// RoomGame
 //
 // ==============================================================
 
-bool SoundManager::LoadSEDeckSelect() {
+bool SoundManager::LoadSERoomGame() {
 
 	std::vector<const TCHAR*> SEname = {
-	_T("mp3/SE/deckSelectMove.mp3")
+	_T("mp3/SE/selectSE.mp3"), _T("mp3/SE/okSE.mp3"), _T("mp3/SE/ok.mp3"), _T("mp3/SE/DeckSelectCancel.mp3"),
+		_T("mp3/SE/mistake.mp3"),_T("mp3/SE/barUp.mp3"),_T("mp3/SE/barDown.mp3"),
 	};
 
-	return LoadSE(SEname, _vSEDeckSelectHandle);
+	return LoadSE(SEname, _vSERoomGameHandle);
 }
 
-void SoundManager::DeleteSEDeckSelect() {
+void SoundManager::DeleteSERoomGame() {
 
-	DeleteSE(_vSEDeckSelectHandle);
+	DeleteSE(_vSERoomGameHandle);
 }
 
-bool SoundManager::PlaySEDeckSelect(SEDeckSelect type, int delayFrame) {
+bool SoundManager::PlaySERoomGame(SERoomGame type, int delayFrame) {
 
-	if (type >= SEDeckSelect::Max) {
+	if (type >= SERoomGame::Max) {
 		return false;
 	}
 
 	int index = static_cast<int>(type);
 
-	if (index >= _vSEDeckSelectHandle.size()) {
+	if (index >= _vSERoomGameHandle.size()) {
 		return false;
 	}
 
-	return PlaySE(_vSEDeckSelectHandle[index], delayFrame);
+	return PlaySE(_vSERoomGameHandle[index], delayFrame);
 }
 
 // ==============================================================
 //
-// InGame
+// SEActionGame
 //
 // ==============================================================
 
-bool SoundManager::LoadSEInGame() {
+bool SoundManager::LoadSEActionGame() {
 
 	std::vector<const TCHAR*> SEname = {
-		_T("mp3/SE/Action/takarabako.mp3")
+		_T("mp3/SE/Action/takarabako.mp3"),_T("mp3/SE/Action/actionCancel.mp3"),_T("mp3/SE/Action/actionKettei.mp3"),
+		_T("mp3/SE/Action/actionSelect.mp3")
 	};
 
-	return LoadSE(SEname, _vSEInGameHandle);
+	return LoadSE(SEname, _vSEActionGameHandle);
 }
 
-void SoundManager::DeleteSEInGame() {
+void SoundManager::DeleteSEActionGame() {
 
-	DeleteSE(_vSEInGameHandle);
+	DeleteSE(_vSEActionGameHandle);
 }
 
-bool SoundManager::PlaySEInGame(InGame type, int delayFrame) {
+bool SoundManager::PlaySEActionGame(SEActionGame type, int delayFrame) {
 
-	if (type >= InGame::Max) {
+	if (type >= SEActionGame::Max) {
 		return false;
 	}
 
 	int index = static_cast<int>(type);
 
-	if (index >= _vSEInGameHandle.size()) {
+	if (index >= _vSEActionGameHandle.size()) {
 		return false;
 	}
 
-	return PlaySE(_vSEInGameHandle[index], delayFrame);
+	return PlaySE(_vSEActionGameHandle[index], delayFrame);
 }
 
-
+//==================================================================
 void SoundManager::Process() {
 
 	if (_nowPlayBgm != BGM::Max && _bgmFadeCount > 0) {

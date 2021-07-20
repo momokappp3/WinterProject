@@ -383,7 +383,7 @@ bool ModeTitle::Process() {
 			ModeServer::GetInstance()->Del(this);  // ‚±‚Ìƒ‚[ƒh‚ðíœ—\–ñ
 			ModeServer::GetInstance()->Add(new RoomGame(), 3, "RoomGame");  // ŽŸ‚Ìƒ‚[ƒh‚ð“o˜^
 			_pSoundManager->DeleteSETitle();
-			_pSoundManager->PlayBgm(SoundManager::BGM::InGame);
+			_pSoundManager->PlayBgm(SoundManager::BGM::RoomGame);
 			break;
 
 		case Kind::LoadGame:

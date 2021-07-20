@@ -49,6 +49,7 @@ UIRoomMenu::UIRoomMenu() {
 
 	_lastMolecule = 0;
 	_lastMentalNum = 0;
+	_lastTotalFavor = 0;
 }
 
 UIRoomMenu::~UIRoomMenu() {
@@ -76,6 +77,7 @@ bool UIRoomMenu::Init(std::shared_ptr<SoundManager>& soundManager, std::shared_p
 	_pPlayerInfo = playerInfo;
 
 	_lastMentalNum = _pPlayerInfo->GetMentalNum();
+	_lastTotalFavor = _pPlayerInfo->GetTotalFavor();
 
 	_pCancelSelectBase.reset(new UI2DSelectBase);
 	_pSettingSelectBase.reset(new UI2DSelectBase);
@@ -130,13 +132,15 @@ bool UIRoomMenu::Init(std::shared_ptr<SoundManager>& soundManager, std::shared_p
 
 	auto onSelect = [this]() {
 		//サウンド鳴らす
-		_pSoundManager->PlaySECommon(SoundManager::SECommon::Select);
+		_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Select);
 	};
 
 	_pCancelSelectBase->SetOnSelect(onSelect);
 	_pSettingSelectBase->SetOnSelect(onSelect);
 	_pBstorySelectBase->SetOnSelect(onSelect);
 	_pBitemSelectBase->SetOnSelect(onSelect);
+
+	_pBarRedBase->SetRate(_pPlayerInfo->GetMentalNum());
 
     return true;
 }
@@ -152,14 +156,11 @@ void UIRoomMenu::Process() {
 
 	int molecule = _pPlayerInfo->GetMolecule();
 	int favor = _pPlayerInfo->GetFavor();
+	int totalFavor = _pPlayerInfo->GetTotalFavor();
 
 	if (!_pBarPinkBase->IsStart()) {
 		if (_pBarPinkBase->GetNowRate() != molecule) {
 			if (_lastMolecule != molecule) {  //もし前の値と今が違うなら
-			
-
-				//前の好感度の合計 - 今の好感度の合計 
-				_lastMolecule - molecule;
 
 				_pBarPinkBase->SetLoopNum(0);  //SetLoop(何回Maxに到達させるか)
 				_pBarPinkBase->SetRate(molecule);  //pinkレベルアップゲージ
@@ -172,12 +173,12 @@ void UIRoomMenu::Process() {
 		if (_pPlayerInfo->GetMentalNum() > _lastMentalNum ) {
 			//up音遅延フレーム設ける
 			if (_lastMentalNum != 0) {
-				_pSoundManager->PlaySECommon(SoundManager::SECommon::BarUp,200);
+				_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::BarUp,200);
 			}
 		}
 		else {
 			//down音遅延フレーム設ける
-			_pSoundManager->PlaySECommon(SoundManager::SECommon::BarDown,200);
+			_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::BarDown,200);
 		}
 		_pBarRedBase->SetRate(_pPlayerInfo->GetMentalNum());  //1回だけ
 	}
@@ -216,6 +217,7 @@ void UIRoomMenu::Process() {
 
 	_lastMentalNum = _pPlayerInfo->GetMentalNum();
 	_lastMolecule = molecule;
+	_lastTotalFavor = totalFavor;
 }
 
 void UIRoomMenu::Draw() {

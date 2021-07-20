@@ -33,7 +33,7 @@ bool StrongBox::Init(std::shared_ptr<SoundManager>sound,VECTOR point) {
 		return false;
 	}
 	if (_pSoundManager != nullptr) {
-		bool seTitle = _pSoundManager->LoadSEInGame();
+		bool seTitle = _pSoundManager->LoadSEActionGame();
 
 		if (!seTitle) {
 			return false;
@@ -83,7 +83,7 @@ void StrongBox::Process() {
 	//Anime“–‚½‚è”»’è
 	if (!_isAnim && HitCheck_Line_Triangle(_player3DPosi, _endPlayerPosi, _vertex1, _vertex2, _vertex3).HitFlag) {
 		_pStrongBox->PlayAnimation(0);
-		_pSoundManager->PlaySEInGame(SoundManager::InGame::BoxOpen);
+		_pSoundManager->PlaySEActionGame(SoundManager::SEActionGame::BoxOpen);
 		_isAnim = true;
 	}
 

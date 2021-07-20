@@ -99,7 +99,7 @@ bool UIRoomItem::Init(std::shared_ptr<SoundManager>& soundManager) {
 
 	auto onSelect = [this]() {
 		//ƒTƒEƒ“ƒh–Â‚ç‚·
-		_pSoundManager->PlaySECommon(SoundManager::SECommon::Select);
+		_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Select);
 	};
 
 	_pTequilaBSelectBase->SetOnSelect(onSelect);

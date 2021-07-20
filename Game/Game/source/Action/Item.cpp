@@ -1,7 +1,6 @@
 #include "Item.h"
 #include "Dxlib.h"
 
-
 Item::Item() {
 
     _vItem.clear();
@@ -25,7 +24,7 @@ bool Item::Init(std::shared_ptr<SoundManager> sound) {
 
     auto onSelect = [this]() {
         //サウンド鳴らす
-        _pSoundManager->PlaySECommon(SoundManager::SECommon::Select);
+        _pSoundManager->PlaySEActionGame(SoundManager::SEActionGame::Select);
     };
 
     return true;
@@ -39,12 +38,12 @@ void Item::Process(){
         if (_vItem.size() > 1) {
             if (_pInput->_key[(KEY_INPUT_Z)] == 1) {
                 _itemSelect = (_itemSelect + 1) % _vItem.size(); //(ループする)
-                _pSoundManager->PlaySECommon(SoundManager::SECommon::Select);
+                _pSoundManager->PlaySEActionGame(SoundManager::SEActionGame::Select);
             }
 
             if (_pInput->_key[(KEY_INPUT_C)] == 1) {
                 _itemSelect = (_itemSelect + (_vItem.size() - 1)) % _vItem.size();
-                _pSoundManager->PlaySECommon(SoundManager::SECommon::Select);
+                _pSoundManager->PlaySEActionGame(SoundManager::SEActionGame::Select);
             }
         }
     }

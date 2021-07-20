@@ -118,7 +118,7 @@ bool UIRoomStory::Init(std::shared_ptr<SoundManager>& soundManager) {
 	//sound
 	auto onSelect = [this]() {
 		//ƒTƒEƒ“ƒh–Â‚ç‚·
-		_pSoundManager->PlaySECommon(SoundManager::SECommon::Select);
+		_pSoundManager->PlaySERoomGame(SoundManager::SERoomGame::Select);
 	};
 
 	_pCloselBBase->SetOnSelect(onSelect);
