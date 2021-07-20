@@ -1,5 +1,4 @@
 #pragma once
-
 #include <Tchar.h>
 #include <vector>
 

@@ -17,8 +17,7 @@ public:
 };
 
 // モード
-class ModeGame : public ModeBase
-{
+class ModeGame : public ModeBase{
 	typedef ModeBase base;
 public:
 	virtual bool Initialize();
@@ -54,9 +53,6 @@ protected:
 	int _handleSkySphere;
 	int _frameMapCollision;
 
-
 	// デバッグ用
-	bool	_bViewCollision;
-
-
+	bool _bViewCollision;
 };

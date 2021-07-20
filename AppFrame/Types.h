@@ -50,3 +50,11 @@ struct FaceInfo {
 	int stopTime;
 	int delay;
 };
+
+//DrawInfo‚ÌŠi”[‡‚É•R‚Ã‚¯‚Ä‚¢‚é
+enum class ITEM {
+	Barrier = 4,
+	Portion,
+	Through,
+	None = 0
+};

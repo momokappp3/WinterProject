@@ -28,9 +28,9 @@ namespace amg{
 
         // UTF-8 BOM無し Json file
         std::ifstream ifs(path);
-        picojson::value json_value;
+        picojson::value json_value;  //json読み込みライブラリ
 
-        ifs >> json_value;
+        ifs >> json_value;  //c++の書き方ifstreamの使い方
 
         const auto err = picojson::get_last_error();
 

@@ -1,12 +1,24 @@
-#include "../Mode/Action3DGame.h"
+#include "../../../../AppFrame/source/appframe.h"
+#include "../ApplicationMain.h"
+#include "ModeGame.h"
+#include "ModeTitle.h"
+#include "../../../../AppFrame/MouseInput.h"
+//#include "ModeClear.h"
+#include "Action3DGame.h"
 
 Action3DGame::Action3DGame() {
 
-	_pCamera = nullptr;
-	_pModel = nullptr;
-	_pAnimationBase = nullptr;
-	_pInput = nullptr;
-	//_pAnimation = nullptr;
+	_pMazeStage = nullptr;
+	_pHp = nullptr;
+	_pUIPopUp = nullptr;
+	//_pUITime = nullptr;
+	_pUIItem = nullptr;
+	_pItem = nullptr;
+	_pKeyInput = nullptr;
+
+	_pMouseInput = nullptr;
+
+	_isBGM = false;
 }
 
 Action3DGame::~Action3DGame() {
@@ -18,62 +30,162 @@ bool Action3DGame::Initialize() {
 		return false;
 	}
 
-	_pCamera.reset(new Camera);
-	//_pModel.reset(new Model);
-	_pAnimationBase.reset(new AnimationBase);
-	_pInput.reset(new Input);
+	/*
+	if (_pSoundManager != nullptr) {
+		bool seGame = _pSoundManager->LoadSECommon();
 
-	_pCamera->SetPosition(0.0f,10.0f,-20.0f);
-	_pCamera->SetTarget(0.0f, 10.0f, 0.0f);
-	_pCamera->SetNearFar(0.1f, 800.0f);
+		if (!seGame) {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+	*/
 
-	//_pModel->Load("model/otoko/otoko.pmx");
-	_pAnimationBase->Load("model/otoko/otoko.pmx");
+	_pKeyInput.reset(new Input);
+	_pMazeStage.reset(new MazeStage);
+	_pUIPopUp.reset(new UIPopUp);
+	_pHp.reset(new UIHpGauge);
+	//_pUITime.reset(new UITime);
+	_pItem.reset(new Item);
+	_pUIItem.reset(new UIItem);
+	_pMouseInput.reset(new MouseInput);
+
+	if (!_pMazeStage->Initialize(_pSoundManager) || !_pUIPopUp->Init(_pSoundManager) || !_pHp->Init() || /*!_pUITime->Init() ||*/
+		!_pItem->Init(_pSoundManager) || !_pUIItem->Init()) {
+		return false;
+	}
+
+	_pHp->InitHP(2000);
 
 	return true;
 }
 
 bool Action3DGame::Process() {
-	
-	if (_pInput != nullptr) {
-		_pInput->Process();
-	}
-	//_pModel->Process();
-	_pAnimationBase->Process();
-	_pCamera->Process();
 
-	if (_pInput->_key[(KEY_INPUT_A)] == 1) {
-
-		//モデルに対して角度をつけ足せる
-		//_pModel->GetTransform().AddRotateY(5.0f);
-		_pAnimationBase->GetTransform().AddRotateY(5.0f);
+	//ゲームのBGM
+	if (!_isBGM) {
+		if (_pSoundManager != nullptr) {
+			_pSoundManager->PlayBgm(SoundManager::BGM::InGame);
+			_isBGM = true;
+			//_pUITime->SetStart(3, 20);
+		}
 	}
 
-	if (_pInput->_key[(KEY_INPUT_S)] == 1) {
+	//=======================================================
+	//test
 
-		//モデルに対して角度をつけ足せる
-		//_pModel->GetTransform().AddRotateY(-5.0f);
+	if (_pKeyInput->_key[(KEY_INPUT_R)] == 1) {
+		_pItem->SetItem(ITEM::Barrier);
 	}
 
-
-
-	if (_pInput->_key[(KEY_INPUT_D)] == 1) {
-
-		_pAnimationBase->Play(true, 0, 0.5f);
-
+	if (_pKeyInput->_key[(KEY_INPUT_T)] == 1) {
+		_pItem->SetItem(ITEM::Portion);
 	}
+
+	if (_pKeyInput->_key[(KEY_INPUT_Y)] == 1) {
+		_pItem->SetItem(ITEM::Through);
+	}
+
+	_pUIItem->SetUpperItem(_pItem->GetUpperItem());
+	_pUIItem->SetMiddleItem(_pItem->GetMiddleItem());
+	_pUIItem->SetDownItem(_pItem->GetDownItem());
+
+	_pMazeStage->GetModeCount(GetModeCount());
+
+	//攻撃が当たったら
+	if (_pMazeStage->GetIsHit()) {
+		_pHp->SetHp(1500);
+	}
+
+	//エスケープキーでタイトルに
+	if (CheckHitKey(KEY_INPUT_ESCAPE) == 1) {  //Titleに戻る処理
+		ModeServer::GetInstance()->Del(this);
+		ModeServer::GetInstance()->Add(new ModeTitle(), 1, "title");
+	}
+
+	//=================================================
+	//DoorのPopUp表示クリアに行く処理
+	if (_pMazeStage->GetIsDoorArea()) {
+		_pUIPopUp->SetNowMode(true);
+		_pUIPopUp->SetPopString({ "ここから出る" ,573,403,true });
+		// DrawFormatString(500, 500, GetColor(0, 128, 128), "HIT");
+		if (_pUIPopUp->GetOk()) {
+			//popUpOKならクリアに行く
+			if (_pKeyInput->_key[(KEY_INPUT_RETURN)] == 1) {
+				ModeServer::GetInstance()->Del(this);
+				//ModeServer::GetInstance()->Add(new ModeClear(), 1, "clear");
+				_pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+			}
+		}
+	}
+	else {
+		_pUIPopUp->SetNowMode(false);
+	}
+
+	//=======================================================
+	//宝箱のポップアップ&アイテム
+
+	if (_pMazeStage->GetBox()->GetIsPopUp()) {
+		_pUIPopUp->SetNowMode(true);
+		if (_pMazeStage->GetBox()->GetIsItem()) {
+
+			switch (_pMazeStage->GetBox()->GetItemNum()) {
+			case ITEM::Barrier:
+				_pUIPopUp->SetPopString({ "バリア" ,573,403,true });
+				break;
+			case ITEM::Portion:
+				_pUIPopUp->SetPopString({ "回復薬" ,573,403,true });
+				break;
+			case ITEM::Through:
+				_pUIPopUp->SetPopString({ "すり抜け" ,573,403,true });
+				break;
+			default:
+				break;
+			}
+
+			if (_pKeyInput->_key[(KEY_INPUT_RETURN)] == 1) {
+				_pMazeStage->GetBox()->SetIsItem(false);
+				_pItem->SetItem(_pMazeStage->GetBox()->GetItemNum());
+				_pSoundManager->PlaySECommon(SoundManager::SECommon::OK);
+			}
+		}
+		else {
+			_pUIPopUp->SetPopString({ "何も入っていない" ,553,403,true });
+		}
+	}
+
+	//_pUITime->Process();
+	_pUIPopUp->Process();
+	_pHp->Process();
+	_pMouseInput->Process();
+	_pKeyInput->Process();
+	ModeBase::Process();
+	_pMazeStage->Process();
+	_pItem->Process();
 
 	return true;
 }
 
 bool Action3DGame::Render() {
+	ModeBase::Render();
+	_pMazeStage->Render();
+	_pUIPopUp->Draw();
+	//_pUITime->Draw();
+	_pItem->Draw();
+	;
+	if (_pMazeStage->GetIs3D()) {
+		_pHp->Draw();
+		_pUIItem->Draw();
+	}
 
-	_pCamera->Render();
-	//_pModel->Render();
-	_pAnimationBase->Render();
+	_pMouseInput->Draw();
 	return true;
 }
 
 bool Action3DGame::Terminate() {
+	ModeBase::Terminate();
+	_pMazeStage->Terminate();
 	return true;
 }
