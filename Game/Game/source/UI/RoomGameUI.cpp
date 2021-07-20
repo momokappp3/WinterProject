@@ -86,7 +86,7 @@ bool RoomGameUI::Init(std::shared_ptr<SoundManager>& soundManager, std::shared_p
     _pDownButton.reset(new UI2DSelectBase);
 
     if (!_pUIRoomMenu->Init(_pSoundManager, _pPlayerInfo) || !_pUIRoomMenuInit->Init(_pSoundManager) || !_pUIRoomItem->Init(_pSoundManager) ||
-        !_pUIRoomSetting->Init(_pSoundManager) || !_pUIRoomStory->Init(_pSoundManager) || !_pUIPopUp->Init(_pSoundManager)) {  //~false‚É—ˆ‚Ä‚¢‚é
+        !_pUIRoomSetting->Init(_pSoundManager) || !_pUIRoomStory->Init(_pSoundManager) || !_pUIPopUp->Init(_pSoundManager, {1130,330})) {
         return false;
     }
 

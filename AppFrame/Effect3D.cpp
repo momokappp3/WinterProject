@@ -3,6 +3,8 @@
 #include "../AppFrame/source/Mode/ModeBase.h"
 #include "../AppFrame/source/Mode/ModeServer.h"
 
+
+/*
 Effect3D::Effect3D() {
 
 	//_point = { 0,-150 };
@@ -98,7 +100,6 @@ void Effect3D::Delete() {
 		DeleteEffekseerEffect(_effectResourceHandle);
 	}
 }
-*/
 
 bool Effect3D::Init(const TCHAR* fileName, float magnification) {
 
@@ -143,3 +144,5 @@ void Effect3D::Draw() {
 	Effekseer_Sync3DSetting();  // DXライブラリのカメラとEffekseerのカメラを同期する
 	DrawEffekseer3D();  // Effekseerにより再生中のエフェクトを描画する。
 }
+
+*/

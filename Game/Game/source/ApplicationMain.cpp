@@ -13,9 +13,9 @@ bool ApplicationMain::Initialize(HINSTANCE hInstance) {
 	}
 
 	// Å‰‚Ìƒ‚[ƒh‚Ì“o˜^
-	ModeServer::GetInstance()->Add(new ModeTitle(), 1, "title");
+	//ModeServer::GetInstance()->Add(new ModeTitle(), 1, "title");
 	//ModeServer::GetInstance()->Add(new RoomGame(), 1, "RoomGame");
-	//ModeServer::GetInstance()->Add(new Action3DGame(), 2, "Action");
+	ModeServer::GetInstance()->Add(new Action3DGame(), 2, "Action");
 
 	return true;
 }

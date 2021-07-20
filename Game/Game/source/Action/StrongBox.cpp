@@ -28,7 +28,7 @@ StrongBox::~StrongBox() {
 bool StrongBox::Init(std::shared_ptr<SoundManager>sound,VECTOR point) {
 
 	_pSoundManager = sound;
-
+	
 	if (_pSoundManager == nullptr) {
 		return false;
 	}
@@ -47,7 +47,7 @@ bool StrongBox::Init(std::shared_ptr<SoundManager>sound,VECTOR point) {
     _point = point;
 
 	_pStrongBox.reset(new ModelAnimation);
-	_pStrongBox->Load("model/boxAnime5.mv1");
+	_pStrongBox->Load("model/Action3D/boxAnime5.mv1");
 
 	if (_pStrongBox->GetHandle() == -1) {
 		return false;
@@ -83,7 +83,7 @@ void StrongBox::Process() {
 	//Anime“–‚½‚è”»’è
 	if (!_isAnim && HitCheck_Line_Triangle(_player3DPosi, _endPlayerPosi, _vertex1, _vertex2, _vertex3).HitFlag) {
 		_pStrongBox->PlayAnimation(0);
-		//_pSoundManager->PlaySEInGame(SoundManager::InGame::BoxOpen);
+		_pSoundManager->PlaySEInGame(SoundManager::InGame::BoxOpen);
 		_isAnim = true;
 	}
 

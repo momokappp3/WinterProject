@@ -9,7 +9,7 @@ public:
     UIPopUp();
     virtual ~UIPopUp();
 
-    bool Init(std::shared_ptr<SoundManager>& soundManager);
+    bool Init(std::shared_ptr<SoundManager>& soundManager,Point base);
     void Process();
     void Draw();
 

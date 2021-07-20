@@ -143,12 +143,10 @@ bool SoundManager::PlaySEDeckSelect(SEDeckSelect type, int delayFrame) {
 //
 // ==============================================================
 
-
 bool SoundManager::LoadSEInGame() {
 
 	std::vector<const TCHAR*> SEname = {
-	_T("mp3/SE/cardSelect.mp3"), _T("mp3/SE/CutInHorizontalStart.mp3"), _T("mp3/SE/CutInHorizontalEnd.mp3"),
-	_T("mp3/SE/CutInVerticalStart.mp3"), _T("mp3/SE/CutInVerticalEnd.mp3")
+		_T("mp3/SE/Action/takarabako.mp3")
 	};
 
 	return LoadSE(SEname, _vSEInGameHandle);

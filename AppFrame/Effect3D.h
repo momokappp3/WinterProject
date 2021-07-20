@@ -2,13 +2,13 @@
 #include <tchar.h>
 #include "Types.h"
 #include "../AppFrame/source/Mode/ModeBase.h"
-
+/*
 class Effect3D : public ModeBase {
 public:
 	Effect3D();
 	virtual ~Effect3D();
 
-	/*
+	
 	bool Init(const TCHAR* fileName, float magnification, bool isLoop);
 	virtual void Start();
 	virtual void Stop();
@@ -35,8 +35,6 @@ protected:
 	bool _isLoop;
 	bool _isEnd;
 
-	*/
-
 	virtual bool Init(const TCHAR* fileName, float magnification);
 	virtual bool Terminate();
 	virtual bool Process();
@@ -50,3 +48,5 @@ protected:
 	float	_position_x = 0.0f;
 	float	_position_y = 0.0f;
 };
+
+*/

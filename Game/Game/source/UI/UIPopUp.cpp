@@ -22,7 +22,7 @@ UIPopUp::UIPopUp() {
 UIPopUp::~UIPopUp() {
 }
 
-bool UIPopUp::Init(std::shared_ptr<SoundManager>& soundManager) {
+bool UIPopUp::Init(std::shared_ptr<SoundManager>& soundManager, Point base) {
 
 	if (soundManager != nullptr) {
 		bool seTitle = soundManager->LoadSECommon();
@@ -49,7 +49,8 @@ bool UIPopUp::Init(std::shared_ptr<SoundManager>& soundManager) {
 		return false;
 	}
 
-	DrawInfo info = { handle,1130,330,true };
+	//DrawInfo info = { handle,1130,330,true };
+	DrawInfo info = { handle,base.x,base.y,true };
 	_pPopUpBase->SetDrawInfo(info);
 
 
@@ -117,11 +118,12 @@ void UIPopUp::Process() {
 }
 
 void UIPopUp::Draw() {
-	_pPopUpBase->Draw();
-	_pOkBSelectBase->Draw();
-	_pCloselBBase->Draw();
 
-	if (_popString.isDraw) {
+	if (_popString.isDraw && _nowMode) {
+
+		_pPopUpBase->Draw();
+		_pOkBSelectBase->Draw();
+		_pCloselBBase->Draw();
 		DrawFormatString(_popString.xy.x, _popString.xy.y, GetColor(255, 255, 255),
 						 _popString.string.c_str());
 	}

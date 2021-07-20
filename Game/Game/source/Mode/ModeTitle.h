@@ -44,7 +44,7 @@ private:
 
 	std::unique_ptr<Camera> _pCamera;
 	std::unique_ptr<Model> _pStageModel;
-	std::unique_ptr<Effect3D> _pEffect3D;
+	//std::unique_ptr<Effect3D> _pEffect3D;
 
 	std::unique_ptr<Model> _pLove;
 	std::unique_ptr<Model> _pLove2;

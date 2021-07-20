@@ -15,6 +15,7 @@
 #include "../UI/UITime.h"
 #include "../Action/UI/UIItem.h"
 #include "../Action/Item.h"
+#include "../Action/UI/UIActionPopUp.h"
 
 class Action3DGame : public ModeBase {
 public:
@@ -27,7 +28,7 @@ public:
 private:
 	std::unique_ptr<Input> _pKeyInput;
 	std::unique_ptr<MazeStage> _pMazeStage;
-	std::unique_ptr<UIPopUp> _pUIPopUp;
+	std::unique_ptr<UIActionPopUp> _pUIPopUp;
 	std::unique_ptr<UIHpGauge> _pHp;
 	//std::unique_ptr<UITime> _pUITime;
 	std::unique_ptr<UIItem> _pUIItem;

@@ -68,7 +68,7 @@ const VECTOR PositionSelectExit = { 11.5, -5.047, -200.00 };
 ModeTitle::ModeTitle() {
 
 	_pStageModel = nullptr;
-	_pEffect3D = nullptr;
+	//_pEffect3D = nullptr;
 	_pCamera = nullptr;
 	_pMouseInput = nullptr;
 	_pAnimationBase = nullptr;
@@ -195,8 +195,8 @@ bool ModeTitle::Initialize() {
 	_pTweenTitleMove7.reset(new VectorTween);
 	_pTweenTitleMove8.reset(new VectorTween);
 
-	_pEffect3D.reset(new Effect3D);
-	_pEffect3D->Init("effect/kirakira.efk", 10.0f);
+	//_pEffect3D.reset(new Effect3D);
+	//_pEffect3D->Init("effect/kirakira.efk", 10.0f);
 
 	_pCamera->SetPosition(-3.857570f, 19.892756f, -25.599190f);
 	_pCamera->SetTarget(-10.132383f, 13.788612f, 1.892545f);
@@ -408,7 +408,7 @@ bool ModeTitle::Process() {
 	}
 
 	ModeBase::Process();
-	_pEffect3D->Process();
+	//_pEffect3D->Process();
 	_pAnimationBase->Process();
 	_pCamera->Process();
 	_pStageModel->Process();
@@ -575,7 +575,7 @@ bool ModeTitle::Render() {
 	_pHelp->Render();
 	_pExit->Render();
 	_pAnimationBase->Render();
-	_pEffect3D->Draw();
+	//_pEffect3D->Draw();
 
 	if (_cameraKind == CameraKind::Menu) {
 		TouchTitleMenu();

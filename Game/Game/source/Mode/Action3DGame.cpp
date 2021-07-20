@@ -30,7 +30,6 @@ bool Action3DGame::Initialize() {
 		return false;
 	}
 
-	/*
 	if (_pSoundManager != nullptr) {
 		bool seGame = _pSoundManager->LoadSECommon();
 
@@ -41,23 +40,24 @@ bool Action3DGame::Initialize() {
 	else {
 		return false;
 	}
-	*/
 
 	_pKeyInput.reset(new Input);
 	_pMazeStage.reset(new MazeStage);
-	_pUIPopUp.reset(new UIPopUp);
+	_pUIPopUp.reset(new UIActionPopUp);
 	_pHp.reset(new UIHpGauge);
 	//_pUITime.reset(new UITime);
 	_pItem.reset(new Item);
 	_pUIItem.reset(new UIItem);
 	_pMouseInput.reset(new MouseInput);
 
-	if (!_pMazeStage->Initialize(_pSoundManager) || !_pUIPopUp->Init(_pSoundManager) || !_pHp->Init() || /*!_pUITime->Init() ||*/
+	if (!_pMazeStage->Initialize(_pSoundManager) || !_pUIPopUp->Init() || !_pHp->Init() || /*!_pUITime->Init() ||*/
 		!_pItem->Init(_pSoundManager) || !_pUIItem->Init()) {
 		return false;
 	}
 
 	_pHp->InitHP(2000);
+
+	_pUIPopUp->SetNowMode(false);
 
 	return true;
 }
@@ -109,7 +109,7 @@ bool Action3DGame::Process() {
 	//DoorのPopUp表示クリアに行く処理
 	if (_pMazeStage->GetIsDoorArea()) {
 		_pUIPopUp->SetNowMode(true);
-		_pUIPopUp->SetPopString({ "ここから出る" ,573,403,true });
+		_pUIPopUp->SetPopString({ "ここから出る" ,808,693,true });
 		// DrawFormatString(500, 500, GetColor(0, 128, 128), "HIT");
 		if (_pUIPopUp->GetOk()) {
 			//popUpOKならクリアに行く
@@ -133,13 +133,13 @@ bool Action3DGame::Process() {
 
 			switch (_pMazeStage->GetBox()->GetItemNum()) {
 			case ITEM::Barrier:
-				_pUIPopUp->SetPopString({ "バリア" ,573,403,true });
+				_pUIPopUp->SetPopString({ "バリア" ,833,703,true });
 				break;
 			case ITEM::Portion:
-				_pUIPopUp->SetPopString({ "回復薬" ,573,403,true });
+				_pUIPopUp->SetPopString({ "回復薬" ,833,703,true });
 				break;
 			case ITEM::Through:
-				_pUIPopUp->SetPopString({ "すり抜け" ,573,403,true });
+				_pUIPopUp->SetPopString({ "すり抜け" ,833,703,true });
 				break;
 			default:
 				break;
@@ -152,7 +152,7 @@ bool Action3DGame::Process() {
 			}
 		}
 		else {
-			_pUIPopUp->SetPopString({ "何も入っていない" ,553,403,true });
+			_pUIPopUp->SetPopString({ "何も入っていない" ,833,703,true });
 		}
 	}
 
@@ -162,7 +162,7 @@ bool Action3DGame::Process() {
 	_pMouseInput->Process();
 	_pKeyInput->Process();
 	ModeBase::Process();
-	_pMazeStage->Process();
+	_pMazeStage->Process();  //×
 	_pItem->Process();
 
 	return true;
@@ -171,13 +171,13 @@ bool Action3DGame::Process() {
 bool Action3DGame::Render() {
 	ModeBase::Render();
 	_pMazeStage->Render();
-	_pUIPopUp->Draw();
 	//_pUITime->Draw();
 	_pItem->Draw();
 	;
 	if (_pMazeStage->GetIs3D()) {
 		_pHp->Draw();
 		_pUIItem->Draw();
+		_pUIPopUp->Draw();
 	}
 
 	_pMouseInput->Draw();

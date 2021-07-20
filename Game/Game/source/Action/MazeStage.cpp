@@ -57,14 +57,14 @@ bool MazeStage::Initialize(std::shared_ptr<SoundManager> sound) {
 		return false;
 	}
 
-	cg[ECG_CHIP_BLACK] = ResourceServer::LoadGraph("png/stage/chip_black.png");
-	cg[ECG_CHIP_WHITE] = ResourceServer::LoadGraph("png/stage/chip_white.png");
-	cg[ECG_CHIP_BROWN] = ResourceServer::LoadGraph("png/stage/chip_brown.png");
-	cg[ECG_CHIP_RED] = ResourceServer::LoadGraph("png/stage/chip_red.png");
-	cg[ECG_CHIP_BLUE] = ResourceServer::LoadGraph("png/stage//chip_blue.png");
-	cg[ECG_CHIP_GREEN] = ResourceServer::LoadGraph("png/stage/chip_green.png");
-	cg[ECG_STAR] = ResourceServer::LoadGraph("png/stage/star.png");
-	cg[ECG_HEART] = ResourceServer::LoadGraph("png/stage/heart.png");
+	cg[ECG_CHIP_BLACK] = ResourceServer::LoadGraph("png/ActionUI/stage/chip_black.png");
+	cg[ECG_CHIP_WHITE] = ResourceServer::LoadGraph("png/ActionUI/stage/chip_white.png");
+	cg[ECG_CHIP_BROWN] = ResourceServer::LoadGraph("png/ActionUI/stage/chip_brown.png");
+	cg[ECG_CHIP_RED] = ResourceServer::LoadGraph("png/ActionUI/stage/chip_red.png");
+	cg[ECG_CHIP_BLUE] = ResourceServer::LoadGraph("png/ActionUI/stage/chip_blue.png");
+	cg[ECG_CHIP_GREEN] = ResourceServer::LoadGraph("png/ActionUI/stage/chip_green.png");
+	cg[ECG_STAR] = ResourceServer::LoadGraph("png/ActionUI/stage/star.png");
+	cg[ECG_HEART] = ResourceServer::LoadGraph("png/ActionUI/stage/heart.png");
 
 	StageInit();  	   // ステージ初期化
 	SearchNoPassage(); // 行き止まりを探す
@@ -100,7 +100,7 @@ bool MazeStage::Initialize(std::shared_ptr<SoundManager> sound) {
 	//==============================================
 	//ゴールにドアモデルを設置
 	_pDoor.reset(new ModelAnimation);
-	_pDoor->Load("model/doorAnime.mv1");
+	_pDoor->Load("model/Action3D/doorAnime.mv1");
 
 	if (_pDoor->GetHandle() == -1) {
 		return false;
@@ -125,7 +125,7 @@ bool MazeStage::Initialize(std::shared_ptr<SoundManager> sound) {
 		return false;
 	}
 
-	_effectLoadHandle = LoadEffekseerEffect("pink.efk", 0.3f);
+	_effectLoadHandle = LoadEffekseerEffect("effect/pink.efk", 0.3f);
 
 	if (_effectLoadHandle == -1) {
 		return false;

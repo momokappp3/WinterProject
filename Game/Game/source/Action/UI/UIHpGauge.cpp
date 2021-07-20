@@ -24,8 +24,8 @@ UIHpGauge::~UIHpGauge() {
 
 bool UIHpGauge::Init() {
 
-    int handle = ResourceServer::LoadGraph("png/gameUI/hp.png");
-    _handle = ResourceServer::LoadGraph("png/gameUI/hpInner.png");
+    int handle = ResourceServer::LoadGraph("png/ActionUI/gameUI/hp.png");
+    _handle = ResourceServer::LoadGraph("png/ActionUI/gameUI/hpInner.png");
 
     _point = { 20,20 };
 

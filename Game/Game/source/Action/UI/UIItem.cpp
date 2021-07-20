@@ -14,34 +14,34 @@ UIItem::~UIItem() {
 bool UIItem::Init() {
 
 	//Base
-	int handle = ResourceServer::LoadGraph("png/gameUI/itemBase.png");
+	int handle = ResourceServer::LoadGraph("png/ActionUI/gameUI/itemBase.png");
 
 	if (handle == -1) {
 		return false;
 	}
 
-	DrawInfo info = { handle,10,400,true };  //è„ÇÃBase
+	DrawInfo info = { handle,10,750,true };  //è„ÇÃBase
 	SetDrawInfo(info);
 
-	info = { handle,100,500,true };  //ê^ÇÒíÜÇÃBace
+	info = { handle,100,850,true };  //ê^ÇÒíÜÇÃBace
 	SetDrawInfo(info);
 
-	info = { handle,142,614,true };  //â∫ÇÃBase
+	info = { handle,142,964,true };  //â∫ÇÃBase
 	SetDrawInfo(info);
 
 	//òg
-	handle = ResourceServer::LoadGraph("png/gameUI/itemWaku3.png");
+	handle = ResourceServer::LoadGraph("png/ActionUI/gameUI/itemWaku3.png");
 
 	if (handle == -1) {
 		return false;
 	}
 
-	info = { handle,100,500,true };
+	info = { handle,100,850,true };
 	SetDrawInfo(info);
 
 	//============================================================
 	//itemÇÃâÊëú 4Ç©ÇÁ
-	handle = ResourceServer::LoadGraph("png/gameUI/baria.png");
+	handle = ResourceServer::LoadGraph("png/ActionUI/gameUI/baria.png");
 
 	if (handle == -1) {
 		return false;
@@ -50,7 +50,7 @@ bool UIItem::Init() {
 	info = { handle,0,0,false };
 	SetDrawInfo(info);
 
-	handle = ResourceServer::LoadGraph("png/gameUI/portion.png");
+	handle = ResourceServer::LoadGraph("png/ActionUI/gameUI/portion.png");
 
 	if (handle == -1) {
 		return false;
@@ -59,7 +59,7 @@ bool UIItem::Init() {
 	info = { handle,0,0,false };
 	SetDrawInfo(info);
 
-	handle = ResourceServer::LoadGraph("png/gameUI/surinuke.png");
+	handle = ResourceServer::LoadGraph("png/ActionUI/gameUI/surinuke.png");
 
 	if (handle == -1) {
 		return false;
