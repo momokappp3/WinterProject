@@ -771,7 +771,7 @@ void MazeStage::GameDraw() {
 	// 描画速度表示
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", GetNowCount() - tStart);
 	//プレイヤーの座標
-	DrawFormatString(20, 50, GetColor(255, 255, 255), "プレイヤー(%.3f,0,%.3f)", _player3DPosi.x, _player3DPosi.z);
+	//DrawFormatString(20, 50, GetColor(255, 255, 255), "プレイヤー(%.3f,0,%.3f)", _player3DPosi.x, _player3DPosi.z);
 }
 
 //3Dで壁が道が判定 trueだったら道

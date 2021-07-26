@@ -1,14 +1,17 @@
+/*****************************************************************//**
+ * \file   Camera.h
+ * \brief  カメラ関数
+ * \author momoka
+ * \date   2021 7/22
+ *********************************************************************/
 #pragma once
 #include <string>
 #include "../../AppFrame/source/appframe.h"
 #include "Transform.h"
 
-// 計算用マクロ
-//const float	PI = 3.1415926535897932386f;
-
 #define PI 3.1415926535897932386f;
-#define	DEG2RAD(x)(((x) / 180.0f ) * PI )
-#define	RAD2DEG(x)(((x) * 180.0f ) / PI )
+#define	DEG2RAD (x)(((x) / 180.0f ) * PI );
+#define	RAD2DEG (x)(((x) * 180.0f ) / PI );
 
 class Camera {
 public:

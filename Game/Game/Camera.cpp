@@ -1,6 +1,3 @@
-/*
-ÉJÉÅÉâèàóù
-*/
 #include "Camera.h"
 #include "source/ApplicationMain.h"
 
@@ -36,14 +33,13 @@ void Camera::Process() {
 
 //debugèÓïÒ
 void Camera::Render() {
-
 	/*
 	int x = 0, y = 0, size = 16;
 
 	SetFontSize(size);
-	DrawFormatString(x, y, GetColor(255, 0, 0), "Camera:"); y += size;
-	DrawFormatString(x, y, GetColor(255, 0, 0), "  target = (%5.2f, %5.2f, %5.2f)",_vTarget.x, _vTarget.y,_vTarget.z); y += size;
-	DrawFormatString(x, y, GetColor(255, 0, 0), "  pos    = (%5.2f, %5.2f, %5.2f)",_vPos.x, _vPos.y, _vPos.z); y += size;
+	DrawFormatString(x, y, GetColor(255, 0, 0), "Camera:");y += size;
+	DrawFormatString(x, y, GetColor(255, 0, 0), "  target = (%5.2f, %5.2f, %5.2f)", _vTarget.x, _vTarget.y, _vTarget.z);y += size;
+	DrawFormatString(x, y, GetColor(255, 0, 0), "  pos    = (%5.2f, %5.2f, %5.2f)", _vPos.x, _vPos.y, _vPos.z);y += size;
 
 	float sx = _vPos.x - _vTarget.x;
 	float sz = _vPos.z - _vTarget.z;
@@ -51,6 +47,6 @@ void Camera::Render() {
 	float rad = atan2(sz, sx);
 	float deg = RAD2DEG(rad);
 
-	DrawFormatString(x, y, GetColor(255, 0, 0), "  len = %5.2f, rad = %5.2f, deg = %5.2f", length, rad, deg); y += size;
+	DrawFormatString(x, y, GetColor(255, 0, 0), "  len = %5.2f, rad = %5.2f, deg = %5.2f", length, rad, deg);y += size;
 	*/
 }

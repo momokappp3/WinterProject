@@ -236,9 +236,9 @@ void UIRoomMenu::Draw() {
 	_pCoinNum->Draw();
 	_pTrustNum->Draw();
 
-	DrawFormatString(20, 950, GetColor(255, 205, 0), "GameMenu”š:%d", _pPlayerInfo->GetFavor());
-	DrawFormatString(20, 970, GetColor(255, 205, 0), "GameMenu•ªq:%d", _pPlayerInfo->GetMolecule());
-	DrawFormatString(20, 1000, GetColor(255, 205, 0), "GameMenubar:%d", _pPlayerInfo->GetMentalNum());
+	//DrawFormatString(20, 950, GetColor(255, 205, 0), "GameMenu”š:%d", _pPlayerInfo->GetFavor());
+	//DrawFormatString(20, 970, GetColor(255, 205, 0), "GameMenu•ªq:%d", _pPlayerInfo->GetMolecule());
+	//DrawFormatString(20, 1000, GetColor(255, 205, 0), "GameMenubar:%d", _pPlayerInfo->GetMentalNum());
 }
 
 //================================================

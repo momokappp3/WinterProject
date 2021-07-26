@@ -1,3 +1,4 @@
+/*
 #pragma once
 #include "appframe.h"
 #include <string>
@@ -56,3 +57,4 @@ protected:
 	// デバッグ用
 	bool _bViewCollision;
 };
+*/

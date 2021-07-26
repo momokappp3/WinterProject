@@ -1,4 +1,4 @@
-
+/*
 #include "AppFrame.h"
 #include "../ApplicationMain.h"
 #include "ModeGame.h"
@@ -348,4 +348,4 @@ bool ModeGame::Render() {
 	}
 	return true;
 }
-
+*/

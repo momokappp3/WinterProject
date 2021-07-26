@@ -60,7 +60,7 @@ bool StrongBox::Init(std::shared_ptr<SoundManager>sound,VECTOR point) {
 	//(プレイヤーの二個隣)  (行き止まりに設置する)
 	_pStrongBox->GetTransform().SetPosition(_point);
 	_pStrongBox->GetTransform().SetScale({ 0.18f, 0.18f, 0.18f });
-	_pStrongBox->GetTransform().SetDirection({ 0.0f,0.0f,120.0f });
+	_pStrongBox->GetTransform().SetBaseDirection( 0.0f,0.0f,120.0f );  //最初の向き
 
 	_vertex1 = { _point.x - 20.0f,_point.y,_point.z };
 	_vertex2 = { _point.x + 20.0f,_point.y,_point.z };

@@ -6,6 +6,7 @@
 #include "RoomGame.h"
 #include "ModeGame.h"
 #include "../../Utility.h"
+#include "ModeOption.h"
 
 const VECTOR CAMERA_TITLE_POSITION = { -18.026157f, 14.650770f, -34.953270f };
 const VECTOR CAMERA_TITLE_TARGET = { -18.026155f, 16.672798f, 1.052301f };
@@ -393,7 +394,7 @@ bool ModeTitle::Process() {
 
 		case Kind::Option:
 			ModeServer::GetInstance()->Del(this);  // このモードを削除予約
-			ModeServer::GetInstance()->Add(new ModeGame(), 4, "ModeGame");  // 次のモードを登録
+			ModeServer::GetInstance()->Add(new ModeOption(), 4, "ModeOption");  // 次のモードを登録
 			break;
 
 		case Kind::Help:
